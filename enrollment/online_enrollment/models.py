@@ -48,7 +48,7 @@ class Semester(models.Model):
         return f"{self.semester_id}"
 
 class Student(models.Model):
-    name = models.CharField()
+    name = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
     email = models.EmailField()
     birthdate = models.DateField()
