@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title%}Tuition{% endblock %}
+
+{% block content%}
+<style>
+    .tuition-container {
+        width: 80%;
+        margin: 30px auto;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Add Tuition Button */
+    .add-btn {
+        background-color: #ffcc00;
+        color: #1b1b2f;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 16px;
+        margin-bottom: 25px;
+        transition: 0.3s;
+    }
+
+    .add-btn:hover {
+        background-color: #e6b800;
+    }
+
+    /* Tuition Card */
+    .tuition-card {
+        background-color: #2a2a4d; /* Deep blue card background */
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        margin-bottom: 20px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .tuition-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    }
+
+    .tuition-title {
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 12px;
+        color: #ffcc00; /* Gold accent */
+    }
+
+    .tuition-card p {
+        margin: 6px 0;
+        font-size: 16px;
+        color: #e0e0e0; /* Light gray text for readability */
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid #444;
+        margin: 15px 0;
+    }
+</style>
+
+<div class="tuition-container">
+    <a href="{% url 'add_tuition' %}">
+        <button class="add-btn" type="button">Add New Tuition</button>
+    </a>
+
+    {% for x in tuitions %}
+        <div class="tuition-card">
+            <div class="tuition-title">Payment ID: {{ x.payment_id }}</div>
+            <p><strong>Student ID:</strong> {{ x.student_id }}</p>
+            <p><strong>Amount:</strong> {{ x.amount }}</p>
+            <p><strong>Payment Date:</strong> {{ x.payment_date }}</p>
+            <p><strong>Payment Status:</strong> {{ x.payment_status }}</p>
+        </div>
+    {% empty %}
+        <p>No tuition records available.</p>
+    {% endfor %}
+{% endblock %}

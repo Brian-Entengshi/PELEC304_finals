@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title%}Instructor{% endblock %}
+
+{% block content%}
+<style>
+    .instructor-container {
+        width: 80%;
+        margin: 30px auto;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Add Instructor Button */
+    .add-btn {
+        background-color: #ffcc00;
+        color: #1b1b2f;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 16px;
+        margin-bottom: 25px;
+        transition: 0.3s;
+    }
+
+    .add-btn:hover {
+        background-color: #e6b800;
+    }
+
+    /* Instructor Card */
+    .instructor-card {
+        background-color: #2a2a4d; /* Deep blue card background */
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        margin-bottom: 20px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .instructor-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    }
+
+    .instructor-title {
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 12px;
+        color: #ffcc00; /* gold accent */
+    }
+
+    .instructor-card p {
+        margin: 6px 0;
+        font-size: 16px;
+        color: #e0e0e0; /* lighter text for readability */
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid #444;
+        margin: 15px 0;
+    }
+</style>
+
+<div class="instructor-container">
+    <a href="{% url 'add_instructor' %}">
+        <button class="add-btn" type="button">Add New Instructor</button>
+    </a>
+
+    {% for x in instructors %}
+        <div class="instructor-card">
+            <div class="instructor-title">{{ x.name }}</div>
+            <p><strong>Instructor ID:</strong> {{ x.instructor_id }}</p>
+            <p><strong>Email:</strong> {{ x.email }}</p>
+            <p><strong>Contact Number:</strong> {{ x.contact_number }}</p>
+            <p><strong>Courses Taught:</strong> {{ x.courses_taught }}</p>
+        </div>
+    {% empty %}
+        <p>No instructors available.</p>
+    {% endfor %}
+{% endblock %}

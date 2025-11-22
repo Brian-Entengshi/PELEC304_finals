@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title%}Student{% endblock %}
+
+{% block content%}
+<style>
+    .student-container {
+        width: 80%;
+        margin: 30px auto;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Add Student Button */
+    .add-btn {
+        background-color: #ffcc00;
+        color: #1b1b2f;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 16px;
+        margin-bottom: 25px;
+        transition: 0.3s;
+    }
+
+    .add-btn:hover {
+        background-color: #e6b800;
+    }
+
+    /* Student Card */
+    .student-card {
+        background-color: #2a2a4d; /* Deep blue card background */
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        margin-bottom: 20px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .student-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    }
+
+    .student-title {
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 12px;
+        color: #ffcc00; /* Gold accent */
+    }
+
+    .student-card p {
+        margin: 6px 0;
+        font-size: 16px;
+        color: #e0e0e0; /* Light gray text for readability */
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid #444;
+        margin: 15px 0;
+    }
+</style>
+
+<div class="student-container">
+    <a href="{% url 'add_students' %}">
+        <button class="add-btn" type="button">Add New Student</button>
+    </a>
+
+    {% for x in students %}
+        <div class="student-card">
+            <div class="student-title">{{ x.name }}</div>
+            <p><strong>Password:</strong> {{ x.password }}</p>
+            <p><strong>Email:</strong> {{ x.email }}</p>
+            <p><strong>Birthdate:</strong> {{ x.birthdate }}</p>
+            <p><strong>Age:</strong> {{ x.age }}</p>
+        </div>
+    {% empty %}
+        <p>No students available.</p>
+    {% endfor %}
+</div>
+{% endblock %}
